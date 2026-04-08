@@ -1,217 +1,200 @@
-# skillui
+```
+ ░██████╗██╗░░██╗██╗██╗░░░░░██╗░░░░░██╗░░░██╗██╗
+ ██╔════╝██║░██╔╝██║██║░░░░░██║░░░░░██║░░░██║██║
+ ╚█████╗░█████═╝░██║██║░░░░░██║░░░░░██║░░░██║██║
+ ░╚═══██╗██╔═██╗░██║██║░░░░░██║░░░░░██║░░░██║██║
+ ██████╔╝██║░╚██╗██║███████╗███████╗╚██████╔╝██║
+ ╚═════╝░╚═╝░░╚═╝╚═╝╚══════╝╚══════╝░╚═════╝░╚═╝
+```
+> Reverse-engineer any design system. Pure static analysis. No AI, no API keys.
 
-Reverse engineer any design system. Pure static analysis. No AI. No API keys.
+Point skillui at any website, git repo, or local project and get exact colors, fonts, spacing, components, and animations packaged as a `.skill` file Claude can read.
 
-Point skillui at any website, git repo, or local project and extract exact colors, fonts, spacing, components, and animations. Output is packaged as a .skill file that Claude can read.
-
-------------------------------------------------------------
-
-███████╗██╗  ██╗██╗██╗     ██╗     ██╗   ██╗██╗
-██╔════╝██║ ██╔╝██║██║     ██║     ██║   ██║██║
-███████╗█████╔╝ ██║██║     ██║     ██║   ██║██║
-╚════██║██╔═██╗ ██║██║     ██║     ██║   ██║██║
-███████║██║  ██╗██║███████╗███████╗╚██████╔╝██║
-╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝ ╚═╝
-
-------------------------------------------------------------
-
-INSTALL
-
+```bash
 npm install -g skillui
-
-Requires Node.js 18+
-
-For ultra mode:
-
-npm install playwright
-npx playwright install chromium
-
-------------------------------------------------------------
-
-USAGE
-
-# Crawl a website
-skillui --url https://yoursite.com
-
-# Ultra mode full extraction
 skillui --url https://yoursite.com --mode ultra
+```
 
-# Scan a local project
-skillui --dir ./my-app
+---
 
-# Scan a git repo
-skillui --repo https://github.com/org/repo
-
-------------------------------------------------------------
-
-FLAGS
-
---url <url>           Crawl a live website
---dir <path>          Scan a local project directory
---repo <url>          Clone and scan a git repository
-
---mode ultra          Enable cinematic extraction
---screens <n>         Pages to crawl in ultra mode (default 5, max 20)
---out <path>          Output directory (default ./)
---name <string>       Override project name
---format design-md|skill|both   Output format (default both)
---no-skill            Output DESIGN.md only
-
-------------------------------------------------------------
-
-WHAT IT DOES
+## What it does
 
 skillui crawls your target and extracts:
 
-+--------------------+---------------------------------------------+
-| OUTPUT             | CONTENTS                                    |
-+--------------------+---------------------------------------------+
-| DESIGN.md          | Colors, typography, spacing, components     |
-| ANIMATIONS.md      | CSS keyframes, scroll triggers, libraries   |
-| LAYOUT.md          | Flex/grid structure and layout relations    |
-| COMPONENTS.md      | DOM patterns and class fingerprints         |
-| INTERACTIONS.md    | Hover and focus state diffs                 |
-| VISUAL_GUIDE.md    | Full visual reference with screenshots      |
-| screens/scroll/    | Cinematic scroll journey images             |
-| tokens/*.json      | Design tokens in JSON format                |
-| fonts/             | Bundled Google Fonts                        |
-+--------------------+---------------------------------------------+
+| Output | Contents |
+|---|---|
+| `DESIGN.md` | Colors, typography, spacing, border radius, components |
+| `ANIMATIONS.md` | CSS keyframes, scroll triggers, GSAP/Lottie/Three.js detection |
+| `LAYOUT.md` | Flex/grid containers, page structure, spacing relationships |
+| `COMPONENTS.md` | DOM patterns, HTML fingerprints, class analysis |
+| `INTERACTIONS.md` | Hover/focus state diffs with before/after style snapshots |
+| `VISUAL_GUIDE.md` | Master visual reference with all screenshots embedded |
+| `screens/scroll/` | 7 cinematic scroll journey screenshots |
+| `tokens/*.json` | Colors, spacing, typography as JSON tokens |
+| `fonts/` | Google Fonts bundled locally |
 
-Everything is packaged into a .skill ZIP file.
+Everything is packaged into a `.skill` ZIP file you drop into Claude Code.
 
-------------------------------------------------------------
+---
 
-ULTRA MODE FEATURES
+## Install
 
-Ultra mode adds deep visual extraction:
+```bash
+npm install -g skillui
+```
 
-- 7 scroll journey screenshots across page depth
-- Hover and focus interaction diffs
+Requires Node.js 18+.
+
+For ultra mode visual extraction, install Playwright separately:
+
+```bash
+npm install playwright
+npx playwright install chromium
+```
+
+---
+
+## Usage
+
+### Crawl a website
+
+```bash
+skillui --url https://linear.app
+```
+
+### Ultra mode (full cinematic extraction)
+
+```bash
+skillui --url https://linear.app --mode ultra
+```
+
+Ultra mode adds:
+
+- 7 scroll journey screenshots showing the page at each scroll depth
+- Hover/focus interaction state diffs
 - Full CSS keyframe extraction
-- Animation library detection
-- GSAP
-- Lottie
-- Three.js
-- AOS
-- Video background frame capture
+- Animation library detection (GSAP, Lottie, Three.js, AOS, etc.)
+- Video background first-frame capture
 - DOM component fingerprinting
-- Flex and grid layout mapping
+- Flex/grid layout extraction
 
-------------------------------------------------------------
+### Scan a local project
 
-EXAMPLES
+```bash
+skillui --dir ./my-app
+```
 
-# Extract Nothing.tech design system
-skillui --url https://nothing.tech --mode ultra --screens 10
+### Clone and scan a git repo
 
-# Scan a Next.js app
-skillui --dir ./my-nextjs-app --name "MyApp"
+```bash
+skillui --repo https://github.com/org/repo
+```
 
-# Analyze a repo
-skillui --repo https://github.com/vercel/next.js --name "NextJS"
+### All flags
 
-# Output only DESIGN.md
-skillui --url https://stripe.com --format design-md
+```
+skillui --url <url>           Crawl a live website
+skillui --dir <path>          Scan a local project directory
+skillui --repo <url>          Clone and scan a git repository
 
-# Custom output directory
-skillui --url https://linear.app --out ./design-systems
+--mode ultra                  Enable cinematic extraction (requires Playwright)
+--screens <n>                 Pages to crawl in ultra mode (default: 5, max: 20)
+--out <path>                  Output directory (default: ./)
+--name <string>               Override the project name
+--format design-md|skill|both Output format (default: both)
+--no-skill                    Output DESIGN.md only, skip .skill packaging
+```
 
-------------------------------------------------------------
+---
 
-USE WITH CLAUDE
+## Use with Claude Code
 
-Install the generated skill file:
+After running skillui, install the `.skill` file:
 
+```bash
 claude skill install ./linear-design.skill
+```
 
-Then prompt:
+Then ask Claude:
 
-Build me a dashboard that matches the Linear design system
+> "Build me a dashboard that matches the Linear design system"
 
-Claude will use:
+Claude will read `DESIGN.md`, `ANIMATIONS.md`, `LAYOUT.md`, `COMPONENTS.md`, and all scroll journey screenshots to reconstruct the exact visual language of the site.
 
-- DESIGN.md
-- ANIMATIONS.md
-- LAYOUT.md
-- COMPONENTS.md
-- INTERACTIONS.md
-- VISUAL screenshots
+---
 
-to reconstruct the design system.
+## Output structure
 
-------------------------------------------------------------
-
-OUTPUT STRUCTURE
-
+```
 linear-design/
-├── SKILL.md
-├── DESIGN.md
+├── SKILL.md                  # Master skill file (loaded by Claude)
+├── DESIGN.md                 # Full design system tokens
 ├── references/
-│   ├── DESIGN.md
-│   ├── ANIMATIONS.md
-│   ├── LAYOUT.md
-│   ├── COMPONENTS.md
-│   ├── INTERACTIONS.md
-│   └── VISUAL_GUIDE.md
+│   ├── DESIGN.md             # Extended design reference
+│   ├── ANIMATIONS.md         # Motion specs and keyframes
+│   ├── LAYOUT.md             # Layout containers and grid
+│   ├── COMPONENTS.md         # DOM component patterns
+│   ├── INTERACTIONS.md       # Hover/focus state diffs
+│   └── VISUAL_GUIDE.md       # All screenshots in sequence
 ├── screens/
-│   ├── scroll/
-│   │   ├── scroll-000.png
+│   ├── scroll/               # Scroll journey screenshots
+│   │   ├── scroll-000.png    # Hero / above the fold
 │   │   ├── scroll-017.png
 │   │   ├── scroll-033.png
 │   │   ├── scroll-050.png
 │   │   ├── scroll-067.png
 │   │   ├── scroll-083.png
-│   │   └── scroll-100.png
-│   ├── pages/
-│   └── sections/
+│   │   └── scroll-100.png    # Footer
+│   ├── pages/                # Full-page screenshots (ultra)
+│   └── sections/             # Section clip screenshots (ultra)
 ├── tokens/
 │   ├── colors.json
 │   ├── spacing.json
 │   └── typography.json
-└── fonts/
+└── fonts/                    # Bundled Google Fonts (woff2)
+```
 
-------------------------------------------------------------
+---
 
-HOW IT WORKS
+## Examples
 
-skillui uses pure static analysis.
+```bash
+# Extract Nothing.tech design system with full ultra mode
+skillui --url https://nothing.tech --mode ultra --screens 10
 
-URL mode
-- Fetches HTML
-- Crawls linked CSS
-- Extracts computed styles using Playwright
+# Scan a local Next.js app
+skillui --dir ./my-nextjs-app --name "MyApp"
 
-Dir mode
-- Scans CSS, SCSS, TS, TSX, JS, JSX
-- Extracts tokens, Tailwind config, variables
-- Detects component patterns
+# Clone and analyze a public repo
+skillui --repo https://github.com/vercel/next.js --name "Next.js"
 
-Repo mode
-- Clones repo to temp directory
-- Runs dir mode
+# Output only DESIGN.md, no .skill packaging
+skillui --url https://stripe.com --format design-md
 
-Ultra mode
-- Uses Playwright
-- Captures scroll journey screenshots
-- Extracts keyframes from stylesheets
-- Detects animation libraries via window globals
-- Captures hover and focus diffs
-- Fingerprints DOM components
+# Save output to a specific directory
+skillui --url https://linear.app --out ./design-systems
+```
 
-------------------------------------------------------------
+---
 
-REQUIREMENTS
+## How it works
 
-Node.js 18+
+skillui uses pure static analysis. No AI, no API keys, no cloud.
 
-Ultra mode:
-npm install playwright
-npx playwright install chromium
+- **URL mode** fetches HTML, crawls all linked CSS files, extracts computed styles via Playwright DOM inspection
+- **Dir mode** scans all `.css`, `.scss`, `.ts`, `.tsx`, `.js`, `.jsx` files for design tokens, Tailwind config, CSS variables, and component patterns
+- **Repo mode** clones the repo to a temp directory and runs dir mode
+- **Ultra mode** runs Playwright to capture scroll journey screenshots, detect animation libraries from `window.*` globals, extract `@keyframes` from `document.styleSheets`, capture hover/focus state diffs, and fingerprint DOM components
 
-------------------------------------------------------------
+---
 
-LICENSE
+## Requirements
+
+- Node.js 18+
+- For `--mode ultra`: Playwright (`npm install playwright && npx playwright install chromium`)
+
+---
+
+## License
 
 MIT
-
-------------------------------------------------------------
