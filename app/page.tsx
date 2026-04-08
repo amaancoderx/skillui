@@ -214,7 +214,7 @@ export default function Home() {
             npm
           </a>
           <a
-            href="https://github.com/amaanbuilds/skillui"
+            href="https://github.com/amaancoderx/skillui"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs text-[#bbb] dark:text-[#333] hover:text-[#555] dark:hover:text-[#888] transition-colors duration-150"
