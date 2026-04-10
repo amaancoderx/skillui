@@ -33,7 +33,7 @@ skillui crawls your target and extracts:
 | `tokens/*.json` | Colors, spacing, typography as JSON tokens |
 | `fonts/` | Google Fonts bundled locally |
 
-Everything is packaged into a `.skill` ZIP file you drop into Claude Code.
+Everything is packaged into a `.skill` ZIP file inside the output folder.
 
 ---
 
@@ -109,17 +109,17 @@ skillui --repo <url>          Clone and scan a git repository
 
 ## Use with Claude Code
 
-After running skillui, install the `.skill` file:
+After running skillui, open the output folder with Claude Code:
 
 ```bash
-claude skill install ./linear-design.skill
+cd linear-design && claude
 ```
 
-Then ask Claude:
+Then ask Claude to build your UI:
 
 > "Build me a dashboard that matches the Linear design system"
 
-Claude will read `DESIGN.md`, `ANIMATIONS.md`, `LAYOUT.md`, `COMPONENTS.md`, and all scroll journey screenshots to reconstruct the exact visual language of the site.
+Claude automatically reads `CLAUDE.md` and `SKILL.md` from the folder, which contain the full design system context. It uses the colors, typography, spacing, components, animations, and screenshots to generate an HTML file matching the exact visual language of the site.
 
 ---
 
@@ -127,15 +127,16 @@ Claude will read `DESIGN.md`, `ANIMATIONS.md`, `LAYOUT.md`, `COMPONENTS.md`, and
 
 ```
 linear-design/
+├── linear-design.skill       # Packaged .skill ZIP (contains everything)
 ├── SKILL.md                  # Master skill file (loaded by Claude)
+├── CLAUDE.md                 # Claude Code project instructions
 ├── DESIGN.md                 # Full design system tokens
 ├── references/
-│   ├── DESIGN.md             # Extended design reference
 │   ├── ANIMATIONS.md         # Motion specs and keyframes
 │   ├── LAYOUT.md             # Layout containers and grid
 │   ├── COMPONENTS.md         # DOM component patterns
 │   ├── INTERACTIONS.md       # Hover/focus state diffs
-│   └── VISUAL_GUIDE.md       # All screenshots in sequence
+│   └── VISUAL_GUIDE.md       # All screenshots embedded in sequence
 ├── screens/
 │   ├── scroll/               # Scroll journey screenshots
 │   │   ├── scroll-000.png    # Hero / above the fold
