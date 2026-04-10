@@ -63,8 +63,8 @@ const whatYouGet = [
   { title: 'Component map',    body: 'DOM patterns, class fingerprints, hover states, focus rings and interaction diffs.' },
   { title: 'Layout system',    body: 'Every flex/grid container with alignment, gap, padding, and responsive breakpoints.' },
   { title: 'Font bundles',     body: 'Google Fonts downloaded locally into the .skill ZIP so Claude has them offline.' },
-  { title: 'Auto /skills',     body: 'Skill folder auto-installed to ~/.claude/skills/ and visible instantly in Claude Code.' },
-  { title: 'Full SKILL.md',    body: 'All reference files embedded inline so Claude has full context from /skills alone.' },
+  { title: 'CLAUDE.md included', body: 'Output folder includes CLAUDE.md so Claude Code picks up the design system automatically when you cd in.' },
+  { title: 'Full SKILL.md',    body: 'All reference files embedded inline so Claude has full context the moment you open the folder.' },
   { title: 'Zero config',      body: 'No API keys, no AI, no cloud. Pure static analysis that works on any site or codebase.' },
 ]
 
