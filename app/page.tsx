@@ -86,7 +86,7 @@ export default function Home() {
               npm i -g skillui
             </a>
             <a
-              href="https://github.com/amaancoderx/skillui"
+              href="https://github.com/amaancoderx/npxskillui"
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-xs text-[#888] dark:text-[#555] hover:text-black dark:hover:text-white transition-colors duration-150 border border-[#e5e5e5] dark:border-[#1a1a1a] hover:border-[#ccc] dark:hover:border-[#333] px-3 py-1.5 rounded-md"
@@ -347,7 +347,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 w-full max-w-lg">
             <CodeBlock code="npm install -g skillui" variant="inline" className="flex-1" />
             <a
-              href="https://github.com/amaancoderx/skillui"
+              href="https://github.com/amaancoderx/npxskillui"
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-xs text-[#888] dark:text-[#555] hover:text-black dark:hover:text-white transition-colors duration-150 border border-[#e5e5e5] dark:border-[#1a1a1a] hover:border-[#ccc] dark:hover:border-[#333] px-4 py-2.5 rounded-lg text-center"
@@ -371,7 +371,7 @@ export default function Home() {
             npm
           </a>
           <a
-            href="https://github.com/amaancoderx/skillui"
+            href="https://github.com/amaancoderx/npxskillui"
             target="_blank"
             rel="noopener noreferrer"
             className="font-mono text-xs text-[#bbb] dark:text-[#333] hover:text-[#555] dark:hover:text-[#888] transition-colors duration-150"
